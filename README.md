@@ -1,23 +1,21 @@
 # Lesson-Swift-Concurrency
 
-Let’s start with a class definition like this:
+Create a class conforming to the protocol `SafeStringDictionary` (see `SafeDictionary1` as a starting point):
 
-```swift
-class SafeStringDictionary {
-   public func add(key: String, value: String) { ... }
-   public func delete(key: String) { ... }
-   public func get(key: String) -> String
+```
+public protocol SafeStringDictionary {
+   func add(key: String, value: String)
+   func delete(key: String)
+   func get(key: String) -> String?
 }
 ```
 
 We’ll keep everything as String’s for now to keep the data part simple.  
 
-Version 1: Implement the functions in that class in a thread-safe way using DispatchSemaphore() .
-Version 2: Implement the functions in that class in a thread-safe way using DispatchQueue()
+Step 1: Implement the functions without worrying about thread safety.
 
-You can ensure thread-safety by creating an operation like this:
+Step 2: Modify your implementation to use `DispatchSemaphore()` to ensure thread safety.
 
-```swift
-let opQ = OperationQueue()
-opQ.maxConcurrentOperationCount = 10
-```
+Step 3: Modify your implementation to use `DispatchQueue()` to ensure thread safety.
+
+You can use the unit test `testThat_Dictionary_CanStoreValue()` to verify core functionality and `testThat_DictionaryIsThreadSafe()` to determine thread safety.
